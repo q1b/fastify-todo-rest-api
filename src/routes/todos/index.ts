@@ -4,9 +4,18 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 	fastify.get<{
 		Querystring: {
 			id: string;
+			group_id: string;
 		};
 	}>('/', async function (req, reply) {
-		const { id } = req.query;
+		const { id, group_id } = req.query;
+		if (group_id) {
+			const res_todos = await fastify.prisma.todos.findMany({
+				where: {
+					groupId: group_id,
+				},
+			});
+			return res_todos;
+		}
 		if (id)
 			return await fastify.prisma.todos.findFirst({
 				where: {
@@ -15,7 +24,6 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 			});
 		else await fastify.prisma.todos.findMany();
 	});
-
 	fastify.post<{
 		Querystring: {
 			group_id: string;
@@ -38,7 +46,6 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 			return { msg: 'rejected' };
 		}
 	});
-
 	fastify.put<{
 		Params: {
 			id: string;

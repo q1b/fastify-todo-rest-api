@@ -12,7 +12,7 @@ const todo_group: FastifyPluginAsync = async (fastify): Promise<void> => {
 		'/',
 		async (req, reply) => {
 			const { id, todos } = req.query;
-			if (id && todos) {
+			if (id && todos)
 				return await fastify.prisma.todoGroup
 					.findFirst({
 						where: {
@@ -20,7 +20,7 @@ const todo_group: FastifyPluginAsync = async (fastify): Promise<void> => {
 						},
 					})
 					.todos();
-			} else if (id) {
+			else if (id) {
 				return await fastify.prisma.todoGroup.findFirst({
 					where: {
 						id,

@@ -13,11 +13,9 @@ const app: FastifyPluginAsync<AppOptions> = async (
 ): Promise<void> => {
 	// Place here your custom code!
 	fastify.register(FastifyCors, {
-		origin: [
-			'https://todo-application-ebon.vercel.app/',
-			'http://localhost:3000/',
-			// /\.example2\.com$/
-		],
+		origin: '*',
+		// 'http://localhost:3000/',
+		// /\.example2\.com$/
 	});
 	// Do not touch the following lines
 

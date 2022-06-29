@@ -13,9 +13,11 @@ const app: FastifyPluginAsync<AppOptions> = async (
 ): Promise<void> => {
 	// Place here your custom code!
 	fastify.register(FastifyCors, {
-		origin: '*',
-		// 'http://localhost:3000/',
-		// /\.example2\.com$/
+		origin: [
+			'https://fixday.vercel.app',
+			'http://localhost:3001',
+			'http://localhost:3000',
+		],
 	});
 	// Do not touch the following lines
 

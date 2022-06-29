@@ -1,0 +1,25 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model TodoGroup {
+    id        String  @id @default(auto()) @map("_id") @db.ObjectId
+    label     String? @default("Todo App")
+    viewCount Int     @default(0)
+    todos     Todos[]
+}
+
+model Todos {
+    id        String     @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    label     String
+    done      Boolean?   @default(false)
+    group     TodoGroup? @relation(fields: [groupId], references: [id])
+    groupId   String?
+}

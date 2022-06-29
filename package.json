@@ -1,0 +1,63 @@
+{
+    "name": "fastify-todo-rest-api",
+    "version": "1.0.0",
+    "description": "This project was bootstrapped with Fastify-CLI.",
+    "main": "app.ts",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "npm run build:ts ; tsc -p test/tsconfig.json ; tap --ts test/**/*.test.ts",
+        "start": "npm run build:ts ; fastify start -l info dist/app.js",
+        "build:ts": "tsc",
+        "watch:ts": "tsc -w",
+        "dev": "npm run build:ts ; concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
+        "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sacarvy/fastify-todo-rest-api.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sacarvy/fastify-todo-rest-api/issues"
+    },
+    "homepage": "https://github.com/sacarvy/fastify-todo-rest-api#readme",
+    "dependencies": {
+        "@fastify/autoload": "^5.0.0",
+        "@fastify/cors": "^8.0.0",
+        "@fastify/sensible": "^4.1.0",
+        "@prisma/client": "^3.15.2",
+        "@sinclair/typebox": "^0.23.5",
+        "fastify": "^4.0.0",
+        "fastify-cli": "^4.1.1",
+        "fastify-plugin": "^3.0.0",
+        "fastify-swagger": "^5.2.0",
+        "mongoose": "^6.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.8",
+        "@types/tap": "^15.0.5",
+        "@typescript-eslint/eslint-plugin": "^5.29.0",
+        "@typescript-eslint/parser": "^5.29.0",
+        "concurrently": "^7.0.0",
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "fastify-tsconfig": "^1.0.1",
+        "prettier": "^2.7.1",
+        "prisma": "^3.15.2",
+        "tap": "^16.1.0",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.4"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "useTabs": true,
+        "singleQuote": true,
+        "printWidth": 80,
+        "trailingComma": "all"
+    }
+}
